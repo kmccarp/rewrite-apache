@@ -92,7 +92,7 @@ public class ApacheIOUtilsUseExplicitCharset extends Recipe {
             public J.MethodInvocation visitMethodInvocation(J.MethodInvocation method, ExecutionContext ctx) {
                 J.MethodInvocation mi = super.visitMethodInvocation(method, ctx);
                 if (STRING_GET_BYTES.matches(mi)) {
-                    mi = mi.withSelect(method.getArguments().get(0));
+                    mi = mi.withSelect(method.getArguments().getFirst());
                     //noinspection ConstantConditions
                     mi = mi.withMethodType(mi.getMethodType().withName("getBytes"));
                     mi = JavaTemplate.builder("#{any(String)}.getBytes(StandardCharsets.#{})}")
@@ -101,7 +101,7 @@ public class ApacheIOUtilsUseExplicitCharset extends Recipe {
                             .build()
                             .apply(updateCursor(mi),
                                     mi.getCoordinates().replaceMethod(),
-                                    mi.getArguments().get(0), encoding == null ? "UTF_8" : encoding);
+                                    mi.getArguments().getFirst(), encoding == null ? "UTF_8" : encoding);
                 } else {
                     for (Map.Entry<MethodMatcher, String> entry : MATCHER_TEMPLATES.entrySet()) {
                         if (entry.getKey().matches(mi)) {

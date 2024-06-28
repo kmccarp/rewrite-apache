@@ -83,7 +83,7 @@ public class IsNotEmptyToJdk extends Recipe {
                     return mi;
                 }
 
-                Expression arg = mi.getArguments().get(0);
+                Expression arg = mi.getArguments().getFirst();
 
                 // Replace StringUtils.isEmpty(var) with var == null || var.isEmpty()
                 if (isRepeatableArgument(arg)) {

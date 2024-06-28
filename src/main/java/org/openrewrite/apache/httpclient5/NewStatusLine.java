@@ -37,10 +37,12 @@ public class NewStatusLine extends Recipe {
 
     @Override
     public String getDescription() {
-        return "`HttpResponse::getStatusLine()` was deprecated in 4.x, so we replace it for `new StatusLine(HttpResponse)`. " +
-                "Ideally we will try to simplify method chains for `getStatusCode`, `getProtocolVersion` and `getReasonPhrase`, " +
-                "but there are some scenarios where the `StatusLine` object is assigned or used directly, and we need to " +
-                "instantiate the object.";
+        return """
+                `HttpResponse::getStatusLine()` was deprecated in 4.x, so we replace it for `new StatusLine(HttpResponse)`. \
+                Ideally we will try to simplify method chains for `getStatusCode`, `getProtocolVersion` and `getReasonPhrase`, \
+                but there are some scenarios where the `StatusLine` object is assigned or used directly, and we need to \
+                instantiate the object.\
+                """;
     }
 
     @Override

@@ -34,13 +34,16 @@ public class MigrateDefaultHttpClient extends Recipe {
 
     @Override
     public String getDescription() {
-        return "Since `DefaultHttpClient` is deprecated, we need to change it to the `CloseableHttpClient`. " +
-               "It only covers the default scenario with no custom `HttpParams` or `ConnectionManager`.\n\n" +
-               "Of note: the `DefaultHttpClient` [does not support TLS 1.2](https://find-sec-bugs.github.io/bugs.htm#DEFAULT_HTTP_CLIENT).\n" +
-               "\n" +
-               "References:\n" +
-               " - [Find Sec Bugs](https://find-sec-bugs.github.io/bugs.htm#DEFAULT_HTTP_CLIENT)" +
-               " - [IBM Support Pages](https://www.ibm.com/support/pages/im-using-apache-httpclient-make-outbound-call-my-web-application-running-websphere-application-server-traditional-and-im-getting-ssl-handshake-error-how-can-i-debug)";
+        return """
+               Since `DefaultHttpClient` is deprecated, we need to change it to the `CloseableHttpClient`. \
+               It only covers the default scenario with no custom `HttpParams` or `ConnectionManager`.
+               
+               Of note: the `DefaultHttpClient` [does not support TLS 1.2](https://find-sec-bugs.github.io/bugs.htm#DEFAULT_HTTP_CLIENT).
+               
+               References:
+                - [Find Sec Bugs](https://find-sec-bugs.github.io/bugs.htm#DEFAULT_HTTP_CLIENT)\
+                - [IBM Support Pages](https://www.ibm.com/support/pages/im-using-apache-httpclient-make-outbound-call-my-web-application-running-websphere-application-server-traditional-and-im-getting-ssl-handshake-error-how-can-i-debug)\
+               """;
     }
 
     @Override

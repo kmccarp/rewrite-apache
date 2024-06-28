@@ -60,7 +60,7 @@ public class ApacheBase64ToJavaBase64 extends Recipe {
                 J.MethodInvocation mi = super.visitMethodInvocation(method, ctx);
                 String templatePrefix = null;
                 if (apacheEncodeToString.matches(mi)) {
-                    String argType = mi.getArguments().get(0).getType() instanceof JavaType.Array ? "#{anyArray()}" : "#{any(String)}";
+                    String argType = mi.getArguments().getFirst().getType() instanceof JavaType.Array ? "#{anyArray()}" : "#{any(String)}";
                     templatePrefix = "Base64.getEncoder().encodeToString(" + argType + ")";
                 } else if (apacheEncode64.matches(mi)) {
                     templatePrefix = "Base64.getEncoder().encode(#{anyArray()})";
@@ -75,7 +75,7 @@ public class ApacheBase64ToJavaBase64 extends Recipe {
                     JavaTemplate t = JavaTemplate.builder(templatePrefix).imports("java.util.Base64").build();
                     maybeRemoveImport("org.apache.commons.codec.binary.Base64");
                     maybeAddImport("java.util.Base64");
-                    mi = t.apply(updateCursor(mi), mi.getCoordinates().replace(), mi.getArguments().get(0));
+                    mi = t.apply(updateCursor(mi), mi.getCoordinates().replace(), mi.getArguments().getFirst());
                 }
                 return mi;
             }
